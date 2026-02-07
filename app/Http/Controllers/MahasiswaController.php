@@ -29,7 +29,7 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        // Validasi data
+        // 1. Validasi
         $validated = $request->validate([
             'nim' => 'required|unique:mahasiswas,nim|string|max:20',
             'nama' => 'required|string|max:100',
@@ -37,9 +37,10 @@ class MahasiswaController extends Controller
             'matakuliah' => 'required|string|max:50'
         ]);
 
-        // Simpan ke database
+        // 2. Simpan (Pastikan fillable di Model sudah ada)
         Mahasiswa::create($validated);
 
+        // 3. Redirect dengan pesan sukses
         return redirect()->route('mahasiswa.index')
                          ->with('success', 'Data mahasiswa berhasil ditambahkan!');
     }
@@ -49,7 +50,7 @@ class MahasiswaController extends Controller
      */
     public function edit($id)
     {
-        // Mencari data berdasarkan NIM
+        // Karena primary key sudah diset 'nim' di Model, findOrFail akan mencari ke kolom NIM
         $mahasiswa = Mahasiswa::findOrFail($id);
         return view('mahasiswa.edit', compact('mahasiswa'));
     }
@@ -59,7 +60,6 @@ class MahasiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Validasi data (NIM yang sedang diedit dikecualikan dari aturan 'unique')
         $validated = $request->validate([
             'nim' => 'required|string|max:20|unique:mahasiswas,nim,' . $id . ',nim',
             'nama' => 'required|string|max:100',
@@ -67,7 +67,6 @@ class MahasiswaController extends Controller
             'matakuliah' => 'required|string|max:50'
         ]);
 
-        // Cari data berdasarkan NIM dan update
         $mahasiswa = Mahasiswa::findOrFail($id);
         $mahasiswa->update($validated);
 
