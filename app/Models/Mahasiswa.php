@@ -9,19 +9,17 @@ class Mahasiswa extends Model
 {
     use HasFactory;
 
-    // Nama tabel di database
+    // Nama tabel di database (Pastikan di database namanya memang mahasiswas)
     protected $table = 'mahasiswas';
 
     // Memberitahu Laravel bahwa Primary Key adalah nim, bukan id
     protected $primaryKey = 'nim';
 
-    // Jika NIM bukan angka yang auto-increment (misal: "220101"), set false
+    // NIM biasanya string dan bukan angka auto-increment
     public $incrementing = false;
-
-    // Tipe data Primary Key
     protected $keyType = 'string';
 
-    // Kolom yang boleh diisi (Mass Assignment)
+    // Kolom yang boleh diisi secara massal
     protected $fillable = [
         'nim',
         'nama',
