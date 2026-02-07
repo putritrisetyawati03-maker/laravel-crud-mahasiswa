@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Mahasiswa</title>
-    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -43,7 +42,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($mahasiswas as $key => $mahasiswa)
+                            @forelse($mahasiswas as $mahasiswa)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td><strong>{{ $mahasiswa->nim }}</strong></td>
@@ -53,7 +52,7 @@
                                 <td class="text-center">
                                     <div class="btn-group" role="group">
                                         <a href="{{ route('mahasiswa.edit', $mahasiswa->nim) }}" 
-                                           class="btn btn-warning btn-sm">✏️ Edit</a>
+                                           class="btn btn-warning btn-sm me-1">✏️ Edit</a>
                                         
                                         <form action="{{ route('mahasiswa.destroy', $mahasiswa->nim) }}" 
                                               method="POST" 
@@ -77,7 +76,6 @@
                         </tbody>
                     </table>
                 </div>
-                @endif
             </div>
         </div>
 
@@ -86,7 +84,6 @@
         </div>
     </div>
 
-    <!-- Bootstrap 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
@@ -100,24 +97,6 @@
                 });
             }, 5000);
         });
-        <!-- Di dalam tabel, kolom Aksi -->
-<td class="text-center">
-    <div class="btn-group" role="group">
-        <a href="{{ route('mahasiswa.edit', $mahasiswa->nim) }}" 
-           class="btn btn-warning btn-sm me-1">✏️ Edit</a>
-        
-        <form action="{{ route('mahasiswa.destroy', $mahasiswa->nim) }}" 
-              method="POST" 
-              class="d-inline"
-              onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="btn btn-danger btn-sm">🗑️ Hapus</button>
-        </form>
-    </div>
-</td>
     </script>
 </body>
-
 </html>
-
