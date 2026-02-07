@@ -77,8 +77,9 @@
                         </tbody>
                     </table>
                 </div>
-
-                @if($mahasiswas->hasPages())
+            @if($mahasiswas->hasPages())  // ← PLURAL: $mahasiswas
+            {{ $mahasiswas->links() }}    // ← PLURAL: $mahasiswas
+                
                 <div class="d-flex justify-content-center mt-4">
                     {{ $mahasiswas->links() }}
                 </div>
@@ -123,4 +124,5 @@
 </td>
     </script>
 </body>
+
 </html>
